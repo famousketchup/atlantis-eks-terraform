@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.14.0"
@@ -50,4 +52,6 @@ resource "helm_release" "atlantis" {
     name  = "repoWhitelist"
     value = "github.com/${var.github_user}/${var.github_repo}"
   }
+
+  provider = kubernetes.eks
 }

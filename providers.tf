@@ -3,6 +3,12 @@ provider "aws" {
 }
 
 provider "kubernetes" {
+  # LOCAL provider
+  # It will rely on kubectl config for initial auth.
+}
+
+provider "kubernetes" {
+  alias                  = "eks"
   host                   = module.eks.cluster_endpoint
   cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
   exec {
